@@ -9,10 +9,12 @@ import Navbar from './components/Navbar';
 
 //css
 import './App.css'
+import Sidebar from './components/Sidebar'
 
 function App() {
   return (
     <div className="App">
+      <Sidebar></Sidebar>
       <div className="container">
         <Navbar></Navbar>
         <Routes>
