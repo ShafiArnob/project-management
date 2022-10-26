@@ -12,6 +12,7 @@ import { useAuthContext } from "./hooks/useAuthContext"
 import './App.css'
 import Sidebar from './components/Sidebar'
 import RequireAuth from './shared/RequireAuth'
+import OnlineUsers from './components/OnlineUsers'
 
 function App() {
   const {user} = useAuthContext()
@@ -47,6 +48,7 @@ function App() {
           }/>
         </Routes>
       </div>
+      {user && <OnlineUsers></OnlineUsers>}
     </div>
   );
 }
