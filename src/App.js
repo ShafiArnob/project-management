@@ -17,7 +17,7 @@ function App() {
   const {user} = useAuthContext()
   return (
     <div className="App">
-      <Sidebar></Sidebar>
+      {user && <Sidebar/>}
       <div className="container">
         <Navbar></Navbar>
         <Routes>
