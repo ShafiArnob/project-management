@@ -1,5 +1,13 @@
 import { useState } from 'react'
+import Select from 'react-select'
 import './Create.css'
+
+const categories = [
+  { value: 'development', label: 'Development' },
+  { value: 'design', label: 'Design' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'marketing', label: 'Marketing' },
+]
 
 function Create() {
   const [name,setName] = useState('')
@@ -34,7 +42,7 @@ function Create() {
 
         <label>
           <span>Project Category</span>
-          {/* category select here */}
+          <Select onChange={(option)=>setCategory(option)} options={categories}/>
         </label>
         
         <label>
