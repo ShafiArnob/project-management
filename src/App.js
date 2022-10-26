@@ -21,13 +21,13 @@ function App() {
       <div className="container">
         <Navbar></Navbar>
         <Routes>
-          <Route exact path='/' element={
+          <Route path='/' element={
             <RequireAuth>
               <Dashboard/>
             </RequireAuth>
           }/>
 
-          <Route exact path='/create' element={
+          <Route path='/create' element={
             <RequireAuth>
               <Create/>
             </RequireAuth>
@@ -39,10 +39,10 @@ function App() {
             </RequireAuth>
           }/>
 
-          <Route exact path='/login' element={
+          <Route path='/login' element={
             user?<Navigate to="/"/>:<Login/>
           }/>
-          <Route exact path='/signup' element={
+          <Route path='/signup' element={
             user?<Navigate to="/"/>:<Signup/>   
           }/>
         </Routes>

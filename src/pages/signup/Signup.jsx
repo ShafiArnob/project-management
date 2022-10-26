@@ -8,7 +8,7 @@ function Signup() {
   const [thumbnail, setThumbnail] = useState(null)
   const [thumbnailError, setThumbnailError] = useState(null)
 
-  const { signup, isPending, error} = useSignup()
+  const { signup, error} = useSignup()
   
   const handleFileChange = (e) =>{
     setThumbnail(null)

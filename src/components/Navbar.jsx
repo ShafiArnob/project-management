@@ -3,7 +3,7 @@ import Temple from '../assets/temple.svg'
 import {Link} from 'react-router-dom'
 import {useLogout} from '../hooks/useLogout'
 function Navbar() {
-  const {logout, isPending} = useLogout()
+  const {logout} = useLogout()
 
   return (
     <div className='navbar'>
@@ -14,7 +14,7 @@ function Navbar() {
         </li>
 
         <li><Link to='/login'>Login</Link></li>
-        <li><Link to='/signup'>Signup</Link></li>
+        <li><Link to='/signup'>Sign up</Link></li>
         <li>
           <button className='btn' onClick={logout}>Logout</button>
         </li>

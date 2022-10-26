@@ -5,7 +5,7 @@ import './Login.css'
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {login, ispending, error} = useLogin()
+  const {login, error} = useLogin()
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -28,7 +28,7 @@ function Login() {
         
       <button className='btn'>Login</button>
 
-      {/* {error && <div className='error'>{error}</div>} */}
+      {error && <div className='error'>{error}</div>}
     </form>
   )
 }
