@@ -17,6 +17,7 @@ function Create() {
   const [dueDate,setDueDate] = useState('')
   const [category,setCategory] = useState('')
   const [assignUsers, setAssignUsers] = useState([])
+  const [formError, setFormError] = useState(null)
 
   const {documents} = useCollection('users')
   const [users, setUsers] = useState([])
@@ -32,6 +33,19 @@ function Create() {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
+
+    setFormError(null)
+
+    if(!category){
+      setFormError("Please Select a project category")
+      return
+    }
+    if(assignUsers.length<1){
+      setFormError("Please assign the project to atleast One user")
+      return
+    }
+
+
     console.log(name, details, dueDate, category.value, assignUsers);
   }
 
@@ -41,17 +55,17 @@ function Create() {
       <form className='create-form' onSubmit={handleSubmit}>
         <label>
           <span>Project Name: </span>
-          <input type="text" onChange={(e)=>setName(e.target.value)} value={name}/>
+          <input type="text" onChange={(e)=>setName(e.target.value)} value={name} required/>
         </label>
 
         <label>
           <span>Project Detail: </span>
-          <textarea type="text" onChange={(e)=>setDetails(e.target.value)} value={details}/>
+          <textarea type="text" onChange={(e)=>setDetails(e.target.value)} value={details} required/>
         </label>
 
         <label>
           <span>Set Due Date: </span>
-          <input type="date" onChange={(e)=>setDueDate(e.target.value)} value={dueDate}/>
+          <input type="date" onChange={(e)=>setDueDate(e.target.value)} value={dueDate} required/>
         </label>
 
         <label>
@@ -66,6 +80,7 @@ function Create() {
 
 
         <button className="btn">Add Project</button>
+        {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
   )
