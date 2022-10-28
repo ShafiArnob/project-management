@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import {useCollection} from '../../hooks/useCollection'
-import { timeStamp } from '../../firebase/config'
+import {timeStamp} from '../../firebase/config'
 import {useAuthContext} from '../../hooks/useAuthContext'
+import {useFirestore} from '../../hooks/useFirestore'
+import {useNavigate} from 'react-router-dom'
+
 import './Create.css'
 
 const categories = [
@@ -20,6 +23,8 @@ function Create() {
   const [assignUsers, setAssignUsers] = useState([])
   const [formError, setFormError] = useState(null)
 
+  const navigate = useNavigate()
+  const {addDocument, response} = useFirestore('projects')
   const {documents} = useCollection('users')
   const [users, setUsers] = useState([])
 
@@ -33,7 +38,7 @@ function Create() {
     }
   },[documents])
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault()
 
     setFormError(null)
@@ -47,10 +52,11 @@ function Create() {
       return
     }
     const assignUsersList = assignUsers.map((u)=>{
+      // console.log(u);
       return {
         displayName: u.value.displayName,
-        photoURL:u.value.photoURL,
-        id: u.value.uid
+        photoURL: u.value.photoURL,
+        id: u.value.id
       }
     })
     const createdBy = {
@@ -61,13 +67,18 @@ function Create() {
     const project = {
       name,
       details,
+      category:category.value,
       dueDate: timeStamp.fromDate(new Date()),
       comments:[],
       createdBy,
       assignUsersList
     }
-
-    console.log(project);
+    // console.log(project);
+    await addDocument(project);
+    if(!response.error){
+      navigate('/')
+    }
+    console.log(response);
   }
 
   return (
